@@ -12,7 +12,6 @@ jobs:
       uses: docker/build-push-action@v1
       working-directory: ./gitlab-time-back
       with:
-
         username: scdcompany
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: scdcompany/gitlab-time-back
