@@ -2,7 +2,12 @@ FROM node:18-alpine as builder
 WORKDIR /app
 COPY . /app
 RUN npm clean-install
-RUN npm run build:docker
+
+ARG BUILD_DEV
+RUN if [[ -z "$BUILD_DEV" ]] ; then npm run build:docker ; else npm run build ; fi
+
+
+# RUN npm run build:docker
 
 FROM nginx:1.19.7-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
