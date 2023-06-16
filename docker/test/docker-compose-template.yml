@@ -1,3 +1,8 @@
+#This is a TEMPLATE for TEST docker file
+# Before starting it
+# 1) Make a copy of it named docker-compose.yml
+# 2) In the copy, teplace all the values in {} with your actual values before running it
+# 3) Place a dump of your gitlab database inside ./scripts directory and name it gitlab_dump.sql
 version: "3.3"
 
 services:

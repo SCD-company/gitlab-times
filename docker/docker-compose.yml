@@ -1,3 +1,6 @@
+#This file simply starts Postgre database for a development purposes
+#Note, that you should place a dump of your gitlab database inside ./scripts directory and name it gitlab_dump.sql
+#Before running this file with docker-compose
 version: "3.3"
 services:
   db:

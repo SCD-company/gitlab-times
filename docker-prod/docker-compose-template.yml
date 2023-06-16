@@ -1,3 +1,9 @@
+#This is a TEMPLATE for PRODUCCTION docker file
+# Before starting it
+# 1) Replace all the values in {} with your actual values
+# 2) If you want it to show all the SQL queris in log, uncomment the 2 commented lines in the environment section
+# 3) if you run gitlab as docker images, add the 2 services from this file to gitlab's docker-compose.yml
+# 4) Otherwise. copy it to docker-compose.yml and run
 version: '3.6'
 
 services:
@@ -7,14 +13,19 @@ services:
     ports:
       - 127.0.0.1:8281:8080
     environment:
+      - APP_PROTOCOL=https
       - SPRING_DATASOURCE_URL=${GITLAB_TIME_DB_URL}
       - SPRING_DATASOURCE_USERNAME=${GITLAB_TIME_DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${GITLAB_TIME_DB_PASSWORD}
+      - APP_SERVERDOMAIN={report.gitlab.softaria.com}
+      - APP_APPLICATIONDOMAIN={report.gitlab.softaria.com}
       - GITLAB_CLIENT_CLIENTID={INSERT ID HERE}
       - GITLAB_CLIENT_CLIENTSECRET={INSERT SECRET HERE}
       - GITLAB_CLIENT_ACCESSTOKENURI=https://{yourgitlab.com}/oauth/token
       - GITLAB_CLIENT_USERAUTHORIZATIONURI=https://{yourgitlab.com}/oauth/authorize
       - GITLAB_RESOURCE_USERINFOURI=https://{yourgitlab.com}/api/v4/user
+      # - LOGGING_LEVEL_COM_QUERYDSL_SQL=DEBUG
+      # - SPRING_JPA_SHOW-SQL=true
 
 
   frontend:
