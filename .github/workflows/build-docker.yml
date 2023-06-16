@@ -11,7 +11,7 @@ jobs:
     - name: Publish to Registry
       uses: docker/build-push-action@v4
       with:
-        context: "{{defaultContext}}:gitlab-time-back"
+        context: ./gitlab-time-back
         username: scdcompany
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: scdcompany/gitlab-time-back
