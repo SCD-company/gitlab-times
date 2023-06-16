@@ -4,7 +4,7 @@ on:
     paths-ignore:
     - 'README.md'
 jobs:
-  build:
+  build-back:
     runs-on: ubuntu-latest
     steps:
     -
@@ -19,7 +19,5 @@ jobs:
       with:
         context: ./gitlab-time-back
         repository: scdcompany/gitlab-time-back
-        username: scdcompany
-        password: ${{ secrets.DOCKER_PWD }}
         push: true
         tags: scdcompany/gitlab-time-back:latest
