@@ -6,11 +6,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./gitlab-time-back
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
       uses: docker/build-push-action@v1
-      working-directory: ./gitlab-time-back
       with:
         username: scdcompany
         password: ${{ secrets.DOCKER_PASSWORD }}
