@@ -22,4 +22,4 @@ jobs:
         username: scdcompany
         password: ${{ secrets.DOCKER_PWD }}
         push: true
-        tags: latest
+        tags: scdcompany/gitlab-time-back:latest
