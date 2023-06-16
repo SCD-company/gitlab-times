@@ -1,5 +1,5 @@
 name: Publish Docker
-on: 
+on:
   push:
     paths-ignore:
     - 'README.md'
