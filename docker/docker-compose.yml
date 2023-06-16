@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  db:
+    container_name: gitlab-time-db-dev
+    image: postgres:13
+    restart: unless-stopped
+    ports:
+      - 5445:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=gitlab_time
+    volumes:
+      - ./scripts/gitlab_dump.sql:/docker-entrypoint-initdb.d/gitlab_dump.sql

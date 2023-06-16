@@ -1,0 +1,27 @@
+version: '3.6'
+
+services:
+  backend:
+    image: scdcompany/gitlab-time-back:latest
+    restart: always
+    ports:
+      - 127.0.0.1:8281:8080
+    environment:
+      - SPRING_DATASOURCE_URL=${GITLAB_TIME_DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${GITLAB_TIME_DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${GITLAB_TIME_DB_PASSWORD}
+
+
+# gitlab.client.clientId={INSERT ID HERE}
+# gitlab.client.clientSecret={INSERT SECRET HERE}
+# gitlab.client.accessTokenUri=https://{yourgitlab.com}/oauth/token
+# gitlab.client.userAuthorizationUri=https://{yourgitlab.com}/oauth/authorize
+# gitlab.resource.userInfoUri=https://{yourgitlab.com}/api/v4/user
+
+  frontend:
+    image: scdcompany/gitlab-time-front:latest
+    restart: always
+    ports:
+      - 127.0.0.1:8280:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf

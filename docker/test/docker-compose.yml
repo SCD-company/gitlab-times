@@ -1,0 +1,37 @@
+version: "3.3"
+
+services:
+  db-postgresql:
+    image: postgres:13
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=gitlab_time
+    volumes:
+      - ./../scripts/gitlab_dump.sql:/docker-entrypoint-initdb.d/gitlab_dump.sql
+
+  backend:
+    image: scdcompany/gitlab-time-back:latest
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-postgresql:5432/gitlab_time
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123
+# gitlab.client.clientId={INSERT ID HERE}
+# gitlab.client.clientSecret={INSERT SECRET HERE}
+# gitlab.client.accessTokenUri=https://{yourgitlab.com}/oauth/token
+# gitlab.client.userAuthorizationUri=https://{yourgitlab.com}/oauth/authorize
+# gitlab.resource.userInfoUri=https://{yourgitlab.com}/api/v4/user
+    depends_on:
+      - db-postgresql
+
+  frontend:
+    image: scdcompany/gitlab-time-front:latest
+    restart: always
+    ports:
+      - 3000:80
