@@ -4,7 +4,7 @@ on:
     paths-ignore:
     - 'README.md'
 jobs:
-  build-back:
+  build:
     runs-on: ubuntu-latest
     steps:
     -
@@ -14,10 +14,17 @@ jobs:
         username: scdcompany
         password: ${{ secrets.DOCKER_PWD }}
     - uses: actions/checkout@master
-    - name: Publish to Registry
+    - name: Build back
       uses: docker/build-push-action@v4
       with:
         context: ./gitlab-time-back
         repository: scdcompany/gitlab-time-back
         push: true
         tags: scdcompany/gitlab-time-back:latest
+    - name: Build front
+      uses: docker/build-push-action@v4
+      with:
+        context: ./gitlab-time-front
+        repository: scdcompany/gitlab-time-front
+        push: true
+        tags: scdcompany/gitlab-time-front:latest
