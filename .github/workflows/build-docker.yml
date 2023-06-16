@@ -19,5 +19,7 @@ jobs:
       with:
         context: ./gitlab-time-back
         repository: scdcompany/gitlab-time-back
+        username: scdcompany
+        password: ${{ secrets.DOCKER_PWD }}
         push: true
         tags: latest
