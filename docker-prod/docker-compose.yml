@@ -10,13 +10,12 @@ services:
       - SPRING_DATASOURCE_URL=${GITLAB_TIME_DB_URL}
       - SPRING_DATASOURCE_USERNAME=${GITLAB_TIME_DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${GITLAB_TIME_DB_PASSWORD}
+      - GITLAB_CLIENT_CLIENTID={INSERT ID HERE}
+      - GITLAB_CLIENT_CLIENTSECRET={INSERT SECRET HERE}
+      - GITLAB_CLIENT_ACCESSTOKENURI=https://{yourgitlab.com}/oauth/token
+      - GITLAB_CLIENT_USERAUTHORIZATIONURI=https://{yourgitlab.com}/oauth/authorize
+      - GITLAB_RESOURCE_USERINFOURI=https://{yourgitlab.com}/api/v4/user
 
-
-# gitlab.client.clientId={INSERT ID HERE}
-# gitlab.client.clientSecret={INSERT SECRET HERE}
-# gitlab.client.accessTokenUri=https://{yourgitlab.com}/oauth/token
-# gitlab.client.userAuthorizationUri=https://{yourgitlab.com}/oauth/authorize
-# gitlab.resource.userInfoUri=https://{yourgitlab.com}/api/v4/user
 
   frontend:
     image: scdcompany/gitlab-time-front:latest
