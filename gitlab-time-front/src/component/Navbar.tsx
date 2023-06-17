@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
           <a href="https://scd-company.com.com/">
             <img src="logo-scd.svg" alt="SCD Company" />
           </a>
+          <S.Headline>Gitlab time spent browser</S.Headline>
         </S.NavbarBrand>
         {props.isUserAuthenticated && (
           <S.LogoutButton>

@@ -9,9 +9,18 @@ const NavbarStyle = styled.div`
   padding-top: 10px;
 `;
 
+const Headline = styled.div`
+  font-family: tahoma;
+  font-weight: bold;
+  padding-top: 27px;
+  padding-left: 30px;
+  font-size: 19px;
+  color: rgb(53, 68, 146);
+`;
+
 const NavbarBrand = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
 
   img {
@@ -50,4 +59,5 @@ export const Styled = {
   NavbarStyle,
   NavbarBrand,
   LogoutButton,
+  Headline,
 };
