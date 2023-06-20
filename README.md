@@ -6,7 +6,7 @@ Note: This software is developed by a 3d party. Gitlab is the trademark of its r
 
 Here is how it looks:
 
-![alt_text](images/image1.png "image_tooltip")
+<img width="1719" alt="Screenshot 2023-06-19 at 17 58 50" src="https://github.com/SCD-company/gitlab-times/assets/5467120/ca146a41-77a7-49bd-8d8f-acc771e2c854">
 
 
 To use this software you need:
