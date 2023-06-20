@@ -230,7 +230,7 @@ CREATE USER times WITH PASSWORD ‘12345678’;
 
 GRANT CONNECT ON DATABASE gitlabhq_production TO times;
 
-GRANT CONNECT ON DATABASE gitlab_time TO times;
+GRANT CONNECT ON SCHEMA gitlab_time TO times;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA gitlab_time TO times;
 
