@@ -1,5 +1,7 @@
 ### Time Spent Report Browser for Gitlab
 
+![GitHub Workflow Status (with event)](https://github.com/SCD-company/gitlab-times/workflows/Publish%20Docker/badge.svg) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-back?label=backend%20pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-back) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-front?label=frontend%20pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-front)
+
 This software allows you to browse, filter and group time spent reports for your self-hosted GitLab. We have developed this as the free version of Gitlab allows one to create time spent reports but the functionality to review them are very limited.
 
 Note: This software is developed by a 3d party. Gitlab is the trademark of its respective owner.
@@ -280,5 +282,3 @@ If you have questions, create an issue and we will respond.
 Thanks for reading, and we hope you will enjoy it!
 
 [SCD Company team](https://scd-company.com)
-
-![GitHub Workflow Status (with event)](https://github.com/SCD-company/gitlab-times/workflows/Publish%20Docker/badge.svg) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-back?label=backend%20pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-back) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-front?label=frontend%20pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-front)
