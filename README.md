@@ -1,4 +1,4 @@
-### Time Spent Report Browser for GiLlab
+### Time Spent Report Browser for Gitlab
 
 This software allows you to browse, filter and group time spent reports for your self-hosted GitLab. We have developed this as the free version of Gitlab allows one to create time spent reports but the functionality to review them are very limited.
 
