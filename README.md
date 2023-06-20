@@ -108,7 +108,7 @@ When the system summarizes several lines it:
 * Rounds each line separately
 * Summarizes NOT rounded values and rounds the result
 
-As a result, the total amount may vary slightly from summarizing **rounded **values. 
+As a result, the total amount may vary slightly from summarizing **rounded** values. 
 
 E.g. if you have
 
