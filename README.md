@@ -279,6 +279,7 @@ If you have questions, create an issue and we will respond.
 
 Thanks for reading, and we hope you will enjoy it!
 
-SCD Company team
+[https://scd-company.com](SCD Company team)
+
 
 [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-back)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-back) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-front)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-front)
