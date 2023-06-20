@@ -282,7 +282,7 @@ Thanks for reading, and we hope you will enjoy it!
 [SCD Company team](https://scd-company.com)
 
 
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SCD-company/gitlab-times/actions/workflows/build-docker.yml)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SCD-company/gitlab-times/.github/workflows/build-docker.yml)
 
 
  [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-back?label=backend%20pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-back) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-front?label=frontend%20pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-front)
