@@ -282,5 +282,4 @@ Thanks for reading, and we hope you will enjoy it!
 [SCD Company team](https://scd-company.com)
 
 
- [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-back?label=backend)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-back) 
-frontend: [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-front)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-front)
+ [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-back?label=backend pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-back) [![docker](https://img.shields.io/docker/pulls/scdcompany/gitlab-time-front?labe=frintend pulls)](https://hub.docker.com/repository/docker/scdcompany/gitlab-time-front)
