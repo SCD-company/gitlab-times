@@ -222,7 +222,7 @@ The system should start at localhost, port 8280. (Feel free to change the port w
 
 **Important note 1**: If your GitLab is installed as a docker service, you just need to append the services from the docker-compose.yml above to the docker-compose.yml where your GitLab is described.
 
-**Important note 2: **Even though you can use an existing database user (e.g. postgres) to access the GitLab database, we recommend creating a new one particularly for this purpose. The new user should be granted read-only access to the GitLab database to ensure the report browser will never change the database.
+**Important note 2**: Even though you can use an existing database user (e.g. postgres) to access the GitLab database, we recommend creating a new one particularly for this purpose. The new user should be granted read-only access to the GitLab database to ensure the report browser will never change the database.
 
 For example:
 
