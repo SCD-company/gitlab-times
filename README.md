@@ -255,7 +255,7 @@ To run the **development** configuration:
 
 1. Build _gitlab-time-back_ with your IDE (VSC, Idea or whatever works with java)
 2. Find _com.scd.gitlabtimeback.GitlabTimeBackApplication_ java class and start it with your IDE
-3. Go to _gitlab-time-front _directory and run:
+3. Go to _gitlab-time-front_ directory and run:
 
 yarn install
 
