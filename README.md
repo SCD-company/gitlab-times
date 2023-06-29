@@ -247,7 +247,7 @@ If you want to fork this project and make changes in its source code, please do 
 
 When you run development or test configuration, it will use this dump to restore a dev database from it. Now you need to provide your Oauth2 properties to the development/test environments. To do so, please 
 
-4. Got to _gitlab-time-back/src/main/resources_ directory
+4. Go to _gitlab-time-back/src/main/resources_ directory
 5. Find file named _application-dev-template.properties_
 6. Copy it as _application-dev.properties_
 7. Edit it - insert your Oauth2 properties as stated inside the file
