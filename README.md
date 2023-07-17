@@ -8,7 +8,7 @@ Note: This software is developed by a 3d party. Gitlab is the trademark of its r
 
 Here is how it looks:
 
-<img width="1719" alt="Screenshot 2023-06-19 at 17 58 50" src="https://github.com/SCD-company/gitlab-times/assets/5467120/ca146a41-77a7-49bd-8d8f-acc771e2c854">
+<img width="1753" alt="Screenshot 2023-07-17 at 13 35 24" src="https://github.com/SCD-company/gitlab-times/assets/5467120/2e3c6bca-66e8-4e1d-8e92-4fb27bde7f25">
 
 
 To use this software you need:
