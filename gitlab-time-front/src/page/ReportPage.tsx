@@ -92,7 +92,8 @@ export const ReportPage: React.FC<ReportPageProps> = ({ userInfo }) => {
           Download as .pdf
         </Button>
       </S.ButtonsGroup>
-      <ReportTable tableData={reportTableData} key={reportTableKey} />
+      {!!reportTableData.length && <ReportTable tableData={reportTableData} key={reportTableKey} />}
+      {!reportTableData.length && <div>No time spent report found for these criteria</div>}
     </S.Page>
   );
 };

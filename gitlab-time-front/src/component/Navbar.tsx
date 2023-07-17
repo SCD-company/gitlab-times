@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
     <S.NavbarStyle>
       <NavBar>
         <S.NavbarBrand className="navbar-brand">
-          <a href="https://scd-company.com.com/">
+          <a href="https://scd-company.com">
             <img src="logo-scd.svg" alt="SCD Company" />
           </a>
           <S.Headline>Gitlab time spent browser</S.Headline>

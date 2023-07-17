@@ -37,31 +37,27 @@ export const ReportTable: React.FC<ReportTableProps> = ({ tableData }) => {
 
   return (
     <S.Table>
-      {!!groupings.length && (
-        <>
-          <S.Row>
-            {groupings.map((group) => (
-              <S.Cell actual bold>
-                {GroupingTranslation[group]}
-              </S.Cell>
-            ))}
-            <S.Cell actual bold>
-              Time
-            </S.Cell>
-          </S.Row>
-          {getRows(tableData)}
-          <S.Row>
-            {groupings.map((column) => (
-              <S.Cell actual bold>
-                {column === groupings[0] && 'Total Time'}
-              </S.Cell>
-            ))}
-            <S.Cell actual bold>
-              {countTotalTime(tableData)}
-            </S.Cell>
-          </S.Row>
-        </>
-      )}
+      <S.Row>
+        {groupings.map((group) => (
+          <S.Cell actual bold>
+            {GroupingTranslation[group]}
+          </S.Cell>
+        ))}
+        <S.Cell actual bold>
+          Time
+        </S.Cell>
+      </S.Row>
+      {getRows(tableData)}
+      <S.Row>
+        {groupings.map((column) => (
+          <S.Cell actual bold>
+            {column === groupings[0] && 'Total Time'}
+          </S.Cell>
+        ))}
+        <S.Cell actual bold>
+          {countTotalTime(tableData)}
+        </S.Cell>
+      </S.Row>
     </S.Table>
   );
 };

@@ -14,7 +14,7 @@ export const CheckboxUseSpentAt: React.FC<CheckboxUseSpentAtProps> = ({ value, s
       </S.Label>
       <S.Checkbox>
         <input type="checkbox" checked={value} onChange={(e) => setValue(e.target.checked)} />
-        <label>Use spent time</label>
+        <label>Use "spent at" date instead of "created at"</label>
       </S.Checkbox>
     </S.FullWidthContainer>
   );
