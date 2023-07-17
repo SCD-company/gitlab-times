@@ -99,7 +99,8 @@ To make it less confusing, archived projects and locked people are colored gray 
 
 E.g. “PowerUpcheckout”, “The site”, “marketing” and “zonesmart” are the archived projects as shown below:
 
-<img width="980" alt="Screenshot 2023-06-19 at 18 07 49" src="https://github.com/SCD-company/gitlab-times/assets/5467120/59ed9793-0ef7-4b8e-8e4f-adf102ae44de">
+<img width="1721" alt="Screenshot 2023-07-17 at 13 40 03" src="https://github.com/SCD-company/gitlab-times/assets/5467120/8ed12d4b-9ba8-453e-b577-21c72460f237">
+
 
 **The total amount of time can vary from the sum of time because of rounding**
 
