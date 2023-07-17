@@ -25,7 +25,7 @@ The system allows browsing time-spent reports. It lets you:
 
 * Filter the reports by project, person and time period,
 * Group the reports by project, person, month and issues,
-* Calculate the reports based on report creation time OR time spent,
+* Calculate the reports based on report creation date OR spent date,
 * Download the result as a CSV file (The same format as Redmine),
 * Download the result as a PDF file.
 
