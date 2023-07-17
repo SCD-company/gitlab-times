@@ -57,7 +57,7 @@ The system supports three levels of access based on the permissions of the authe
   <tr>
    <td>Project owner
    </td>
-   <td>Time report created for all the projects where he/she is the owner + all time reports created by them
+   <td>Time report created for all the projects where he/she is the owner + all time reports created by himself/herself
    </td>
    <td>User needs be assigned the “owner” role for these project(s)
    </td>
