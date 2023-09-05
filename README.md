@@ -213,7 +213,7 @@ Finally, as the system uses authorization via the same GitLab instance, it needs
 
 Please, take a look at [https://docs.gitlab.com/ee/integration/oauth_provider.html](https://docs.gitlab.com/ee/integration/oauth_provider.html) to find how to turn on the Oauth2 provider on GitLab. Please replace {yourgitlab.com} with your gitlab URL.
 
-When all the environment variables are set, just change directory to one with docker-compose.yml, place this nginx.conf file in the same directory and run
+When all the environment variables are set, just change directory to one with docker-compose.yml, place this [nginx.conf](https://github.com/SCD-company/gitlab-times/blob/main/docker-prod/nginx.conf) file in the same directory and run
 
 docker-compose up -d 
 
