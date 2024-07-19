@@ -49,25 +49,24 @@ public class TimeLogMapper {
         }
 
         private String formatIssue(String issue) {
-                StringBuilder sb = new StringBuilder("#");
-                boolean start = true;
-                for (int i = 0; i < issue.length(); i++) {
-                        if (start) {
-                                if (Character.isDigit(issue.charAt(i))) {
-                                        sb.append(issue.charAt(i));
-                                } else {
-                                        start = false;
-                                        sb.append(". ");
-                                        sb.append(issue.charAt(i));
-                                       
-                                }
-                        } else {
-                                sb.append(issue.charAt(i));
-                        }
+               String parts[] = issue.split(" ");
 
+               String closedAt = parts[1].equals("false")?"[open]":"["+YearMonth.parse(parts[1],DateTimeFormatter
+                               .ofPattern("yyyyMM"))
+               .format(DateTimeFormatter
+                               .ofPattern("MM/yyyy"))+"]";
+
+                StringBuilder sb = new StringBuilder("#");
+
+                sb.append(parts[0]);
+                sb.append(" ").append(closedAt);
+
+                for(int i=2;i<parts.length;i++) {
+                        sb.append(" ").append(parts[i]);
                 }
 
                 return sb.toString();
+
         }
 
         public TimeLogDto mapTimeLogToTimeLogDto(TimeLog timeLog) {
