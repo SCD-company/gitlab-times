@@ -22,32 +22,63 @@ public class TimeLogMapper {
 
                 if (time != null) {
                         time = time / 3600;
-                }
-                else {
-                       time = 0.0;
+                } else {
+                        time = 0.0;
                 }
 
-                Boolean archived = tuple.get(3,Boolean.class);
+                Boolean archived = tuple.get(3, Boolean.class);
 
                 return new GroupingReportDto(
                                 grouping,
                                 tuple.get(0, Long.class),
-                                (grouping == GroupingByField.MONTH || grouping == GroupingByField.MONTH_SPENT)
-                                                ? YearMonth.parse(tuple.get(1, String.class),
-                                                                DateTimeFormatter.ofPattern("yyyyMM"))
-                                                                .format(DateTimeFormatter.ofPattern("MM/yyyy"))
-                                                : tuple.get(1, String.class),
+                                (grouping == GroupingByField.MONTH || grouping == GroupingByField.MONTH_SPENT
+                                                || grouping == GroupingByField.CLOSED)
+                                                                ? (tuple.get(1, String.class) == null ? "---"
+                                                                                : YearMonth.parse(tuple.get(1,
+                                                                                                String.class),
+                                                                                                DateTimeFormatter
+                                                                                                                .ofPattern("yyyyMM"))
+                                                                                                .format(DateTimeFormatter
+                                                                                                                .ofPattern("MM/yyyy")))
+                                                                : (grouping == GroupingByField.ISSUE
+                                                                                ? formatIssue(tuple.get(1,
+                                                                                                String.class))
+                                                                                : tuple.get(1, String.class)),
                                 time,
-                                !(archived==null? false:archived),
+                                !(archived == null ? false : archived),
                                 null);
+        }
+
+        private String formatIssue(String issue) {
+                StringBuilder sb = new StringBuilder("#");
+                boolean start = true;
+                for (int i = 0; i < issue.length(); i++) {
+                        if (start) {
+                                if (Character.isDigit(issue.charAt(i))) {
+                                        sb.append(issue.charAt(i));
+                                } else {
+                                        start = false;
+                                        sb.append(". ");
+                                        sb.append(issue.charAt(i));
+                                       
+                                }
+                        } else {
+                                sb.append(issue.charAt(i));
+                        }
+
+                }
+
+                return sb.toString();
         }
 
         public TimeLogDto mapTimeLogToTimeLogDto(TimeLog timeLog) {
                 return new TimeLogDto(timeLog.getId(),
                                 timeLog.getTimeSpent(),
-                                new UserDto(timeLog.getUser().getId(), timeLog.getUser().getName(),timeLog.getUser().getState()),
+                                new UserDto(timeLog.getUser().getId(), timeLog.getUser().getName(),
+                                                timeLog.getUser().getState()),
                                 timeLog.getIssue() != null ? timeLog.getIssue().getTitle() : "",
-                                new ProjectDto(timeLog.getProject().getId(), timeLog.getProject().getName(),timeLog.getProject().isArchived()),
+                                new ProjectDto(timeLog.getProject().getId(), timeLog.getProject().getName(),
+                                                timeLog.getProject().isArchived()),
                                 timeLog.getCreatedAt());
         }
 

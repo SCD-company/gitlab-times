@@ -7,7 +7,8 @@ import static com.scd.gitlabtimeback.entity.QTimeLog.timeLog;
 
 
 public enum GroupingByField {
-    ISSUE(timeLog.issue.id, timeLog.issue.title),
+    ISSUE(timeLog.issue.id, timeLog.issue.iid.stringValue().concat(timeLog.issue.title)),
+    CLOSED(timeLog.issue.closedAt.yearMonth().castToNum(Long.class), timeLog.issue.closedAt.yearMonth().stringValue()),
     PROJECT(timeLog.project.id, timeLog.project.name),
     PERSON(timeLog.user.id, timeLog.user.name),
     MONTH(timeLog.createdAt.yearMonth().castToNum(Long.class), timeLog.createdAt.yearMonth().stringValue()),

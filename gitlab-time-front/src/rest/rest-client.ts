@@ -195,6 +195,7 @@ export type RestResponse<R> = Promise<Axios.GenericAxiosResponse<R>>;
 
 export enum GroupingByField {
   ISSUE = 'ISSUE',
+  CLOSED = 'CLOSED',
   PROJECT = 'PROJECT',
   PERSON = 'PERSON',
   MONTH = 'MONTH',

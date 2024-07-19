@@ -2,6 +2,8 @@ package com.scd.gitlabtimeback.entity;
 
 import lombok.Getter;
 
+import java.time.Instant;
+
 import javax.persistence.*;
 
 @Getter
@@ -18,4 +20,10 @@ public class Issue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
+
+    private Long iid;
+
+    @Column(name="closed_at")
+    private Instant closedAt;
+
 }
