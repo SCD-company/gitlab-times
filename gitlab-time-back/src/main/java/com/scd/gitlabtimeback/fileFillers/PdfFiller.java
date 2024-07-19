@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Component
 public class PdfFiller {
@@ -123,7 +124,7 @@ public class PdfFiller {
         data.forEach(d -> {
             drawBodyRow(tableBuilder,
                     BACKGROUND_COLORS[backgroundColorIndex.getAndUpdate(v -> (v + 1) % BACKGROUND_COLORS.length)],
-                    d.getName(), level, Double.toString(DoubleRounder.round(d.getTime(), 2)), groups);
+                    d.getNames().stream().collect(Collectors.joining(" ")), level, Double.toString(DoubleRounder.round(d.getTime(), 2)), groups);
             addBody(tableBuilder, d.getSubGroup(), level + 1, groups, backgroundColorIndex);
         });
     }

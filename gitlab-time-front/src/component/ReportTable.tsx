@@ -23,7 +23,7 @@ export const ReportTable: React.FC<ReportTableProps> = ({ tableData }) => {
       <>
         <S.Row>
           {groupings.map((column) => (
-            <S.Cell actual={d.actual}>{column === d.type && d.name}</S.Cell>
+            <S.Cell actual={d.actual}>{column === d.type && d.names.join(' ')}</S.Cell>
           ))}
           <S.Cell actual={d.actual}>{d.time.toFixed(2)}</S.Cell>
         </S.Row>

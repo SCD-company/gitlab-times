@@ -14,7 +14,7 @@ import com.scd.gitlabtimeback.enums.GroupingByField;
 public class GroupingReportDto {
     private GroupingByField type;
     private Long id;
-    private String name;
+    private List<String> names;
     private Double time;
     private boolean actual;
     private List<GroupingReportDto> subGroup;

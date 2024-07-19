@@ -114,7 +114,7 @@ export interface GroupingDto {
 export interface GroupingReportDto {
   actual: boolean;
   id: number;
-  name: string;
+  names: string[];
   subGroup: GroupingReportDto[];
   time: number;
   type: GroupingByField;

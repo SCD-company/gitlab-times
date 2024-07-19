@@ -8,27 +8,40 @@ import com.scd.gitlabtimeback.enums.GroupingByField;
 import java.nio.charset.StandardCharsets;
 import org.decimal4j.util.DoubleRounder;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CsvFiller {
     public byte[] fillFile(List<GroupingByField> grouping, List<GroupingReportDto> data) {
-        return (fillHeader(grouping) + fillBody(grouping, data, 0) + fillFooter(data, grouping.size()))
+        var levels = countLevels(grouping);
+    
+        return (fillHeader(grouping) + fillBody(grouping, data, 0,levels) + fillFooter(data,levels ))
                 .replace("\t", " ")
                 .getBytes(StandardCharsets.UTF_8);
+    }
+
+    private int countLevels(List<GroupingByField> grouping) {
+        return grouping.stream().reduce(0,(subtotal,element)->{
+            return subtotal + element.getHeaders().size();
+        },Integer::sum);
     }
 
     private String fillHeader(List<GroupingByField> grouping) {
         StringBuilder str = new StringBuilder();
 
-        grouping.forEach(resultEntry ->
-                str.append(resultEntry.toString().concat(", ")));
+        grouping.forEach(resultEntry -> {
+            resultEntry.getHeaders().forEach(header->{
+                str.append(header.concat(", "));
+            });
+        });
+                
 
         str.append("HOURS\n");
 
         return str.toString();
     }
 
-    private String fillBody(List<GroupingByField> grouping, List<GroupingReportDto> data, Integer level) {
+    private String fillBody(List<GroupingByField> grouping, List<GroupingReportDto> data, Integer level, int levels) {
 
         if (data.isEmpty()) {
             return "";
@@ -38,10 +51,13 @@ public class CsvFiller {
 
         data.forEach(row -> {
             str.append(", ".repeat(Math.max(0, level)));
-            str.append(row.getName().replace(",", " ").concat(", "));
-            str.append(", ".repeat(Math.max(0, grouping.size() - level - 1)));
-            str.append(Double.toString(DoubleRounder.round(row.getTime(),2)).concat("\n"));
-            str.append(fillBody(grouping, row.getSubGroup(), level + 1));
+            str.append(row.getNames().stream().map(name->name.replace(",", " ")).collect(Collectors.joining(",")).concat(", "));
+            str.append(", ".repeat(Math.max(0, levels - row.getNames().size()-level)));
+            if(row.getSubGroup().isEmpty()) {
+                str.append(Double.toString(DoubleRounder.round(row.getTime(),4)));
+            }
+            str.append("\n");
+            str.append(fillBody(grouping, row.getSubGroup(), level + row.getNames().size(),levels));
         });
 
         return str.toString();

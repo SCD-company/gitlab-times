@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class TimeLogMapper {
@@ -28,44 +30,62 @@ public class TimeLogMapper {
 
                 Boolean archived = tuple.get(3, Boolean.class);
 
+                List<String> names;
+                var value = tuple.get(1, String.class);
+
+                switch (grouping) {
+                        case MONTH:
+                        case MONTH_SPENT:
+                                names = List.of(YearMonth.parse(value,
+                                                DateTimeFormatter
+                                                                .ofPattern("yyyyMM"))
+                                                .format(DateTimeFormatter
+                                                                .ofPattern("MM/yyyy")));
+                                break;
+                        case ISSUE:
+                                names = formatIssue(value);
+                                break;
+                        default:
+                                names = List.of(value);
+                                break;
+
+                }
+
                 return new GroupingReportDto(
                                 grouping,
                                 tuple.get(0, Long.class),
-                                (grouping == GroupingByField.MONTH || grouping == GroupingByField.MONTH_SPENT
-                                               )
-                                                                ? (YearMonth.parse(tuple.get(1,
-                                                                                                String.class),
-                                                                                                DateTimeFormatter
-                                                                                                                .ofPattern("yyyyMM"))
-                                                                                                .format(DateTimeFormatter
-                                                                                                                .ofPattern("MM/yyyy")))
-                                                                : (grouping == GroupingByField.ISSUE
-                                                                                ? formatIssue(tuple.get(1,
-                                                                                                String.class))
-                                                                                : tuple.get(1, String.class)),
+                                names,
                                 time,
                                 !(archived == null ? false : archived),
                                 null);
         }
 
-        private String formatIssue(String issue) {
-               String parts[] = issue.split(" ");
+        private List<String> formatIssue(String issue) {
 
-               String closedAt = parts[1].equals("false")?"[open]":"["+YearMonth.parse(parts[1],DateTimeFormatter
-                               .ofPattern("yyyyMM"))
-               .format(DateTimeFormatter
-                               .ofPattern("MM/yyyy"))+"]";
+                List<String> ret = new ArrayList<>(3);
 
-                StringBuilder sb = new StringBuilder("#");
+                String parts[] = issue.split(" ");
 
-                sb.append(parts[0]);
-                sb.append(" ").append(closedAt);
+                String closedAt = parts[1].equals("false") ? "[open]"
+                                : "[" + YearMonth.parse(parts[1], DateTimeFormatter
+                                                .ofPattern("yyyyMM"))
+                                                .format(DateTimeFormatter
+                                                                .ofPattern("MM/yyyy"))
+                                                + "]";
 
-                for(int i=2;i<parts.length;i++) {
+              
+
+                ret.add("#"+parts[0]);
+                ret.add(closedAt);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 2; i < parts.length; i++) {
                         sb.append(" ").append(parts[i]);
                 }
 
-                return sb.toString();
+                ret.add(sb.toString());
+
+                return ret;
 
         }
 
