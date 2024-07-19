@@ -5,7 +5,6 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.dsl.Coalesce;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.scd.gitlabtimeback.entity.TimeLog;
@@ -43,20 +42,16 @@ public class TimeLogDslRepository extends DslRepository<TimeLog, QTimeLog> {
 
         var whereClause = createBooleanBuilder(currentUserId, userId, projectId, issueId, since, to, useSpentTime);
 
-        var groupingId = grouping != GroupingByField.MONTH_SPENT ? grouping.getId()
-                : new Coalesce<>(GroupingByField.MONTH_SPENT.getId(), GroupingByField.MONTH.getId());
-        var groupingName = grouping != GroupingByField.MONTH_SPENT ? grouping.getName()
-                : new Coalesce<>(GroupingByField.MONTH_SPENT.getName(), GroupingByField.MONTH.getName());
-
+      
         var exp = fromNonDistinct(timeLog)
-                .groupBy(groupingId,
-                        groupingName)
+                .groupBy(grouping.getId(),
+                        grouping.getName())
                 .where(whereClause)
-                .select(groupingId,
-                        groupingName,
+                .select(grouping.getId(),
+                        grouping.getName(),
                         timeLog.timeSpent.sum(),
                         getActual(grouping))
-                .orderBy(new OrderSpecifier<>(Order.ASC, groupingName));
+                .orderBy(new OrderSpecifier<>(Order.ASC, grouping.getName()));
                 
 
         if(grouping==GroupingByField.PROJECT) {

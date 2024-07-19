@@ -1,33 +1,33 @@
 package com.scd.gitlabtimeback.enums;
 
-import com.querydsl.core.types.dsl.NumberExpression;
-import com.querydsl.core.types.dsl.StringExpression;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.Coalesce;
 
 import static com.scd.gitlabtimeback.entity.QTimeLog.timeLog;
 
-
 public enum GroupingByField {
     ISSUE(timeLog.issue.id, timeLog.issue.iid.stringValue().concat(timeLog.issue.title)),
-    CLOSED(timeLog.issue.closedAt.yearMonth().castToNum(Long.class), timeLog.issue.closedAt.yearMonth().stringValue()),
     PROJECT(timeLog.project.id, timeLog.project.name),
     PERSON(timeLog.user.id, timeLog.user.name),
     MONTH(timeLog.createdAt.yearMonth().castToNum(Long.class), timeLog.createdAt.yearMonth().stringValue()),
-    MONTH_SPENT(timeLog.spentAt.yearMonth().castToNum(Long.class), timeLog.spentAt.yearMonth().stringValue());
+    MONTH_SPENT(
+            new Coalesce<>(timeLog.spentAt.yearMonth().castToNum(Long.class),
+                    timeLog.createdAt.yearMonth().castToNum(Long.class)),
+            new Coalesce<>(timeLog.spentAt.yearMonth().stringValue(), timeLog.createdAt.yearMonth().stringValue()));
 
-    private final NumberExpression<Long> id;
-    private final StringExpression name;
+    private final Expression<Long> id;
+    private final Expression<String> name;
 
-
-    GroupingByField(NumberExpression<Long> id, StringExpression name) {
+    GroupingByField(Expression<Long> id, Expression<String> name) {
         this.id = id;
         this.name = name;
     }
 
-    public NumberExpression<Long> getId() {
+    public Expression<Long> getId() {
         return id;
     }
 
-    public StringExpression getName() {
+    public Expression<String> getName() {
         return name;
     }
 }

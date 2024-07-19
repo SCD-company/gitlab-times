@@ -32,9 +32,8 @@ public class TimeLogMapper {
                                 grouping,
                                 tuple.get(0, Long.class),
                                 (grouping == GroupingByField.MONTH || grouping == GroupingByField.MONTH_SPENT
-                                                || grouping == GroupingByField.CLOSED)
-                                                                ? (tuple.get(1, String.class) == null ? "---"
-                                                                                : YearMonth.parse(tuple.get(1,
+                                               )
+                                                                ? (YearMonth.parse(tuple.get(1,
                                                                                                 String.class),
                                                                                                 DateTimeFormatter
                                                                                                                 .ofPattern("yyyyMM"))
