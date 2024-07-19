@@ -44,14 +44,14 @@ public class TimeLogDslRepository extends DslRepository<TimeLog, QTimeLog> {
 
       
         var exp = fromNonDistinct(timeLog)
-                .groupBy(grouping.getId(),
-                        grouping.getName())
+                .groupBy(grouping.getId())
+                .groupBy(grouping.getGrouping())
                 .where(whereClause)
                 .select(grouping.getId(),
-                        grouping.getName(),
+                        grouping.getSelect(),
                         timeLog.timeSpent.sum(),
                         getActual(grouping))
-                .orderBy(new OrderSpecifier<>(Order.ASC, grouping.getName()));
+                .orderBy(new OrderSpecifier<>(Order.ASC, grouping.getGrouping()[0]));
                 
 
         if(grouping==GroupingByField.PROJECT) {

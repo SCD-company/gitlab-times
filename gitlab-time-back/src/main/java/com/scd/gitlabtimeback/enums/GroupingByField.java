@@ -5,6 +5,8 @@ import com.querydsl.core.types.dsl.Coalesce;
 
 import static com.scd.gitlabtimeback.entity.QTimeLog.timeLog;
 
+import java.util.List;
+
 public enum GroupingByField {
     ISSUE(timeLog.issue.id, timeLog.issue.iid.stringValue().concat(timeLog.issue.title)),
     PROJECT(timeLog.project.id, timeLog.project.name),
@@ -16,18 +18,32 @@ public enum GroupingByField {
             new Coalesce<>(timeLog.spentAt.yearMonth().stringValue(), timeLog.createdAt.yearMonth().stringValue()));
 
     private final Expression<Long> id;
-    private final Expression<String> name;
+    private final List<Expression<String>> grouping;
+    private final Expression<String> select;
 
     GroupingByField(Expression<Long> id, Expression<String> name) {
         this.id = id;
-        this.name = name;
+        this.grouping = List.of(name);
+        this.select = name;
+    }
+
+
+    GroupingByField(Expression<Long> id, List<Expression<String>> grouping,Expression<String> select) {
+        this.id = id;
+        this.grouping = grouping;
+        this.select = select;
     }
 
     public Expression<Long> getId() {
         return id;
     }
 
-    public Expression<String> getName() {
-        return name;
+    @SuppressWarnings("unchecked")
+    public Expression<String>[] getGrouping() {
+        return grouping.toArray(new Expression[0]);
+    }
+
+    public Expression<String> getSelect() {
+        return select;
     }
 }
