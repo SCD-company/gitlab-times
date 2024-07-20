@@ -95,6 +95,11 @@ export class RestApplicationClient<O> {
   }
 }
 
+export interface Cell {
+  cellType: CellType;
+  text: string;
+}
+
 export interface DataFileDto {
   content: any;
   fileName: string;
@@ -114,10 +119,14 @@ export interface GroupingDto {
 export interface GroupingReportDto {
   actual: boolean;
   id: number;
-  names: string[];
+  names: Cell[];
   subGroup: GroupingReportDto[];
   time: number;
   type: GroupingByField;
+}
+
+export interface LinkCell extends Cell {
+  href: string;
 }
 
 export interface OptionSetDto {
@@ -169,6 +178,8 @@ export interface SearchData {
   userId: number;
 }
 
+export interface TextCell extends Cell {}
+
 export interface TimeLogDto {
   createdAt: number;
   id: number;
@@ -192,6 +203,11 @@ export interface UserDto {
 }
 
 export type RestResponse<R> = Promise<Axios.GenericAxiosResponse<R>>;
+
+export enum CellType {
+  TEXT = 'TEXT',
+  LINK = 'LINK',
+}
 
 export enum GroupingByField {
   ISSUE = 'ISSUE',

@@ -2,8 +2,11 @@ package com.scd.gitlabtimeback.entity;
 
 import lombok.Getter;
 
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -20,4 +23,8 @@ public class Project {
     private String description;
 
     private boolean archived;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Namespace namespace;
 }

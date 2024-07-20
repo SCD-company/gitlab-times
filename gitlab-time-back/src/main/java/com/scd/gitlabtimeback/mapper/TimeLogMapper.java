@@ -7,17 +7,32 @@ import com.scd.gitlabtimeback.dto.TimeLogDto;
 import com.scd.gitlabtimeback.dto.UserDto;
 import com.scd.gitlabtimeback.entity.TimeLog;
 import com.scd.gitlabtimeback.enums.GroupingByField;
+import com.scd.gitlabtimeback.repository.ProjectRepository;
 
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Component
+@RequiredArgsConstructor
 public class TimeLogMapper {
 
+        final ProjectRepository projectRepository;
+
+        @Value("${gitlab.issue.link.base}")
+        private String baseURL;
+
+        @Transactional(propagation = Propagation.MANDATORY)
         public GroupingReportDto mapTupleToGroupingReportDto(Tuple tuple, GroupingByField grouping) {
 
                 Double time = tuple.get(2, Double.class);
@@ -30,23 +45,23 @@ public class TimeLogMapper {
 
                 Boolean archived = tuple.get(3, Boolean.class);
 
-                List<String> names;
+                List<GroupingReportDto.Cell> names;
                 var value = tuple.get(1, String.class);
 
                 switch (grouping) {
                         case MONTH:
                         case MONTH_SPENT:
-                                names = List.of(YearMonth.parse(value,
+                                names = List.of(new GroupingReportDto.TextCell(YearMonth.parse(value,
                                                 DateTimeFormatter
                                                                 .ofPattern("yyyyMM"))
                                                 .format(DateTimeFormatter
-                                                                .ofPattern("MM/yyyy")));
+                                                                .ofPattern("MM/yyyy"))));
                                 break;
                         case ISSUE:
                                 names = formatIssue(value);
                                 break;
                         default:
-                                names = List.of(value);
+                                names = List.of(new GroupingReportDto.TextCell(value));
                                 break;
 
                 }
@@ -60,9 +75,9 @@ public class TimeLogMapper {
                                 null);
         }
 
-        private List<String> formatIssue(String issue) {
+        private List<GroupingReportDto.Cell> formatIssue(String issue) {
 
-                List<String> ret = new ArrayList<>(3);
+                List<GroupingReportDto.Cell> ret = new ArrayList<>(3);
 
                 String parts[] = issue.split(" ");
 
@@ -75,15 +90,23 @@ public class TimeLogMapper {
 
               
 
-                ret.add("#"+parts[0]);
-                ret.add(closedAt);
+              
+
+                long projectId = Long.parseLong(parts[2]);
+
+                var project = projectRepository.findById(projectId).get();
+
+                String path = baseURL+"/"+project.getNamespace().getPath()+"/"+project.getPath()+"/-/issues/"+parts[0];
+
+                ret.add(new GroupingReportDto.LinkCell("#"+parts[0],path));
+                ret.add(new GroupingReportDto.TextCell(closedAt));
 
                 StringBuilder sb = new StringBuilder();
-                for (int i = 2; i < parts.length; i++) {
+                for (int i = 3; i < parts.length; i++) {
                         sb.append(" ").append(parts[i]);
                 }
 
-                ret.add(sb.toString());
+                ret.add(new GroupingReportDto.TextCell(sb.toString()));
 
                 return ret;
 

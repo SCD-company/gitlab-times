@@ -12,8 +12,12 @@ public enum GroupingByField {
     ISSUE(timeLog.issue.id,
             List.of(timeLog.issue.iid.stringValue(), timeLog.issue.title,
                     timeLog.issue.closedAt.yearMonth().stringValue()),
-            timeLog.issue.iid.stringValue().concat(" ").concat(new Coalesce<>(timeLog.issue.closedAt.yearMonth().stringValue(),Expressions.FALSE.stringValue()))
-                    .concat(" ").concat(timeLog.issue.title),List.of("ISSUE ID","CLOSED AT","ISSUE")),
+            timeLog.issue.iid.stringValue().concat(" ")
+                    .concat(new Coalesce<>(timeLog.issue.closedAt.yearMonth().stringValue(),
+                            Expressions.FALSE.stringValue()))
+                    .concat(" ").concat(timeLog.issue.project_id.max().stringValue()).concat(" ")
+                    .concat(timeLog.issue.title),
+            List.of("ISSUE ID", "CLOSED AT", "ISSUE")),
     PROJECT(timeLog.project.id, timeLog.project.name),
     PERSON(timeLog.user.id, timeLog.user.name),
     MONTH(timeLog.createdAt.yearMonth().castToNum(Long.class), timeLog.createdAt.yearMonth().stringValue()),
@@ -34,13 +38,13 @@ public enum GroupingByField {
         this.headers = List.of(name());
     }
 
-    GroupingByField(Expression<Long> id, List<Expression<String>> grouping, Expression<String> select,List<String> headers) {
+    GroupingByField(Expression<Long> id, List<Expression<String>> grouping, Expression<String> select,
+            List<String> headers) {
         this.id = id;
         this.grouping = grouping;
         this.select = select;
         this.headers = headers;
     }
-
 
     public Expression<Long> getId() {
         return id;

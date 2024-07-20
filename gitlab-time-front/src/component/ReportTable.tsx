@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Styled as S } from './ReportTable.styled';
-import { GroupingByField, GroupingReportDto } from '../rest/rest-client';
+import { GroupingByField, GroupingReportDto, LinkCell } from '../rest/rest-client';
 import { GroupingTranslation } from '../translation/GroupingTranslation';
 
 export interface ReportTableProps {
@@ -23,7 +23,15 @@ export const ReportTable: React.FC<ReportTableProps> = ({ tableData }) => {
       <>
         <S.Row>
           {groupings.map((column) => (
-            <S.Cell actual={d.actual}>{column === d.type && d.names.join(' ')}</S.Cell>
+            <S.Cell actual={d.actual}>
+              {column === d.type &&
+                d.names.map((part) => (
+                  <>
+                    {part.cellType === 'TEXT' && <>{part.text}</>}
+                    {part.cellType === 'LINK' && <a href={(part as LinkCell).href}>{part.text}</a>}{' '}
+                  </>
+                ))}
+            </S.Cell>
           ))}
           <S.Cell actual={d.actual}>{d.time.toFixed(2)}</S.Cell>
         </S.Row>

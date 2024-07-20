@@ -51,7 +51,17 @@ public class CsvFiller {
 
         data.forEach(row -> {
             str.append(", ".repeat(Math.max(0, level)));
-            str.append(row.getNames().stream().map(name->name.replace(",", " ")).collect(Collectors.joining(",")).concat(", "));
+            str.append(row.getNames().stream().map(name->{
+                switch(name.getCellType()) {
+                    case TEXT:
+                        return name.getText();
+                    case LINK:
+                        return ((GroupingReportDto.LinkCell)name).getHref();
+                    default: 
+                        throw new RuntimeException();
+                }
+            }
+            ).collect(Collectors.joining(",")).concat(", "));
             str.append(", ".repeat(Math.max(0, levels - row.getNames().size()-level)));
             if(row.getSubGroup().isEmpty()) {
                 str.append(Double.toString(DoubleRounder.round(row.getTime(),4)));

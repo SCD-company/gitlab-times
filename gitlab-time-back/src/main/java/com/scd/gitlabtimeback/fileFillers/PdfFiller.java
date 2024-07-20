@@ -124,7 +124,7 @@ public class PdfFiller {
         data.forEach(d -> {
             drawBodyRow(tableBuilder,
                     BACKGROUND_COLORS[backgroundColorIndex.getAndUpdate(v -> (v + 1) % BACKGROUND_COLORS.length)],
-                    d.getNames().stream().collect(Collectors.joining(" ")), level, Double.toString(DoubleRounder.round(d.getTime(), 2)), groups);
+                    d.getNames().stream().map(cell->cell.getText()).collect(Collectors.joining(" ")), level, Double.toString(DoubleRounder.round(d.getTime(), 2)), groups);
             addBody(tableBuilder, d.getSubGroup(), level + 1, groups, backgroundColorIndex);
         });
     }

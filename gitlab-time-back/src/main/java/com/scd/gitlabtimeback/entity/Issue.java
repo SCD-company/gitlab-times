@@ -18,8 +18,8 @@ public class Issue {
     @ManyToOne(fetch = FetchType.LAZY)
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Project project;
+
+    private long project_id;
 
     private Long iid;
 

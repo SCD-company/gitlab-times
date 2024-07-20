@@ -24,6 +24,7 @@ services:
       - GITLAB_CLIENT_ACCESSTOKENURI=https://{yourgitlab.com}/oauth/token
       - GITLAB_CLIENT_USERAUTHORIZATIONURI=https://{yourgitlab.com}/oauth/authorize
       - GITLAB_RESOURCE_USERINFOURI=https://{yourgitlab.com}/api/v4/user
+      - GITLAB_ISSUE_LINK_BASE=https://{yourgitlab.com}
       # - LOGGING_LEVEL_COM_QUERYDSL_SQL=DEBUG
       # - SPRING_JPA_SHOW-SQL=true
 
