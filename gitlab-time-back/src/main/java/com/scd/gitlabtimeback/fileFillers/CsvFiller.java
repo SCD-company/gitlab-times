@@ -54,9 +54,10 @@ public class CsvFiller {
             str.append(row.getNames().stream().map(name->{
                 switch(name.getCellType()) {
                     case TEXT:
-                        return name.getText();
+                        return name.getText().replace(",", " ");
                     case LINK:
-                        return ((GroupingReportDto.LinkCell)name).getHref();
+                        var href = ((GroupingReportDto.LinkCell)name).getHref();
+                        return href.contains(",")?name.getText():href;
                     default: 
                         throw new RuntimeException();
                 }
