@@ -274,7 +274,9 @@ Instead, you need docker. This configuration was made for QA specialists.
 
 Go to docker/test directory and run
 
-docker-compose up –build
+```
+docker-compose up --build
+```
 
 It will build the project from sources and run it. The system will be accessible at localhost:3000
 
