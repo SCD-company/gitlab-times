@@ -57,7 +57,7 @@ public class CsvFiller {
                         return name.getText().replace(",", " ");
                     case LINK:
                         var href = ((GroupingReportDto.LinkCell)name).getHref();
-                        return href.contains(",")?name.getText():href;
+                        return href.contains(",")?name.getText().replace(","," "):href;
                     default: 
                         throw new RuntimeException();
                 }
