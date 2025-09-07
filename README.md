@@ -123,7 +123,7 @@ It will show:
 
 Project1:  2.06
 
-Project2:  2.06
+Project2:  1.06
 
 Total:    3.11 
 
